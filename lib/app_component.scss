@@ -1,0 +1,16 @@
+@import 'package:angular_components/app_layout/mixins';
+
+:host {
+  @include mat-drawer-list-items;
+}
+
+#nav-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.nav-container {
+  margin-bottom: 100px ;
+}

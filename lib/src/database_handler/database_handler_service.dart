@@ -37,7 +37,30 @@ class DatabaseHandlerService {
     }
   }
 
-  User transformToUser(String email, String name, int role, String phoneNumber, String deliveryDirection) {
-    return User(email, name, role, phoneNumber, deliveryDirection);
+  Future<bool> registerUser(String email, String password, String name, String phoneNumber, String deliveryDirection) async {
+    try {
+      var body = {
+        'email': email,
+        'password': password,
+        'phoneNumber': password,
+        'name': name,
+        'role': '0',
+        'phoneNumber': phoneNumber,
+        'deliveryDirection': deliveryDirection,
+      };
+      final response = await _http.post('${_dbUrl}/users/registerUser', body: body);
+      var data = _extractData(response);
+      if (data['successful'] == 1) {
+        print('sucessfulRegister');
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
+  User transformToUser(String email, String name, String role, String phoneNumber, String deliveryDirection) {
+    return User(email, name, int.parse(role), phoneNumber, deliveryDirection);
   }
 }

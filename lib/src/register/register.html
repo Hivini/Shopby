@@ -1,0 +1,70 @@
+<div class="container">
+  <h1>Register</h1>
+  <form>
+    <div class="form-group">
+      <material-input type="email"
+                      class="form-control"
+                      id="email"
+                      floatingLabel
+                      label="Email"
+                      required
+                      [(ngModel)]="email"
+      >
+      </material-input>
+    </div>
+
+    <div class="form-group">
+      <material-input type="password"
+                      class="form-control"
+                      id="password"
+                      label="Password"
+                      floatingLabel
+                      required
+                      [(ngModel)]="password"
+      >
+      </material-input>
+    </div>
+
+    <div class="form-group">
+      <material-input type="text"
+                      class="form-control"
+                      id="name"
+                      floatingLabel
+                      label="Name"
+                      required
+                      [(ngModel)]="name"
+      >
+      </material-input>
+    </div>
+
+    <div class="form-group">
+      <material-input type="text"
+                      class="form-control"
+                      id="phoneNumber"
+                      floatingLabel
+                      label="Phone Number"
+                      required
+                      [(ngModel)]="phoneNumber"
+      >
+      </material-input>
+    </div>
+
+    <div class="form-group">
+      <material-input type="text"
+                      class="form-control"
+                      id="deliveryDirection"
+                      floatingLabel
+                      label="Delivery Direction"
+                      required
+                      [(ngModel)]="deliveryDirection"
+      >
+      </material-input>
+    </div>
+
+    <div class="row">
+      <div class="col-auto">
+        <material-button (click)="onSubmit()">Submit</material-button>
+      </div>
+    </div>
+  </form>
+</div>

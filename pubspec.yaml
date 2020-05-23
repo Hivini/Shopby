@@ -12,7 +12,7 @@ dependencies:
   angular_components: ^0.13.0
   angular_router: ^2.0.0-alpha
   meta: ^1.1.8
-
+  pq_toast: any
 
 dev_dependencies:
   angular_test: ^2.3.0

@@ -5,10 +5,14 @@
         <span class="material-header-title">Shopby</span>
         <div class="material-spacer"></div>
         <nav class="material-navigation">
-          <a [routerLink]="RoutePaths.login.toUrl()">Login</a>
+          <material-button [routerLink]="RoutePaths.login.toUrl()">
+            Login
+          </material-button>
         </nav>
         <nav class="material-navigation">
-          <a>Register</a>
+          <material-button [routerLink]="RoutePaths.register.toUrl()">
+            Register
+          </material-button>
         </nav>
       </div>
     </div>
@@ -18,7 +22,10 @@
         <span class="material-header-title">Shopby</span>
         <div class="material-spacer"></div>
         <nav class="material-navigation">
-          <a>Products</a>
+          <material-button>Products</material-button>
+        </nav>
+        <nav class="material-navigation">
+          <material-button (click)="signOut()">Sign Out</material-button>
         </nav>
       </div>
     </div>

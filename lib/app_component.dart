@@ -38,4 +38,8 @@ class AppComponent {
   final DatabaseHandlerService dbService;
 
   AppComponent(this.dbService);
+
+  void signOut() {
+    dbService.currentUser = null;
+  }
 }

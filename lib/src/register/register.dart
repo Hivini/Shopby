@@ -4,6 +4,7 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_components/material_input/material_input.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:pq_toast/pq_toast.dart';
 
 import '../route_paths.dart';
 import '../routes.dart';
@@ -35,9 +36,13 @@ class Register {
   void onSubmit() async {
     if (isValid()) {
       var success = await _dbService.registerUser(email, password, name, phoneNumber, deliveryDirection);
-      print(success);
       clear();
-      _location.back();
+      if (success) {
+        Toast.showSuccessToast('Successful register');
+        _location.back();
+      } else {
+        Toast.showErrorToast('Account already exists');
+      }
     }
   }
 

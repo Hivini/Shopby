@@ -33,7 +33,6 @@ class Login {
   void onSubmit() async {
     if (isValid()) {
       var success = await _dbService.login(email, password);
-      print('login ${success}');
       clear();
       if (success) {
         Toast.showSuccessToast('Successful Login');

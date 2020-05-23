@@ -2,7 +2,7 @@ import 'package:angular/angular.dart';
 
 @Component(
   selector: 'home',
-  templateUrl: 'home_component.html',
+  templateUrl: 'home.html',
 )
 class HomeComponent {
   var name = 'Angular';

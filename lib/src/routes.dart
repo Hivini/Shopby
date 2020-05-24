@@ -4,6 +4,7 @@ import 'route_paths.dart';
 import 'home/home.template.dart' as home_template;
 import 'login/login.template.dart' as login_template;
 import 'register/register.template.dart' as register_template;
+import 'user_product/user_product.template.dart' as user_product_template;
 
 export 'route_paths.dart';
 
@@ -24,10 +25,16 @@ class Routes {
     component: register_template.RegisterNgFactory,
   );
 
+  static final userProducts = RouteDefinition(
+    routePath: RoutePaths.userProducts,
+    component: user_product_template.UserProductNgFactory,
+  );
+
   static final all = <RouteDefinition>[
     home,
     login,
     register,
+    userProducts,
     RouteDefinition.redirect(
       path: '',
       redirectTo: RoutePaths.home.toUrl()

@@ -4,4 +4,5 @@ class RoutePaths {
   static final login = RoutePath(path: 'login');
   static final register = RoutePath(path: 'register');
   static final home = RoutePath(path: 'home');
+  static final userProducts = RoutePath(path: 'userProducts');
 }

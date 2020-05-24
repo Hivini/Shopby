@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:Shopby/src/database_handler/product.dart';
 import 'package:Shopby/src/database_handler/user.dart';
 import 'package:Shopby/config/credentials.dart' as credentials;
 import 'package:http/http.dart';
@@ -60,7 +61,33 @@ class DatabaseHandlerService {
     }
   }
 
+  Future<List<Product>> getProductsByUser(String email) async {
+    try {
+      final response = await _http.get('${_dbUrl}/products/getAllProductsByUser', headers: {'email': email});
+      var data = _extractData(response);
+      if (data['successful'] == 1) {
+        var products = data['products'];
+        var resultProds = <Product>[];
+        for (var prod in products) {
+          resultProds.add(transformToProduct(prod['id'], prod['title'], prod['description'], prod['imageUrl'], prod['user'], prod['rating'], prod['totalRatings']));
+        }
+        return resultProds;
+      } else {
+        return <Product>[];
+      }
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
   User transformToUser(String email, String name, String role, String phoneNumber, String deliveryDirection) {
     return User(email, name, int.parse(role), phoneNumber, deliveryDirection);
+  }
+
+  Product transformToProduct(productId, title, description, imageUrl, user, rating, totalRatings) {
+    return Product(productId, title, description, imageUrl,
+        transformToUser(user['email'], user['name'], user['role'],
+            user['phoneNumber'], user['deliveryDirection']),
+        rating, totalRatings);
   }
 }

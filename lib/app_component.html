@@ -22,7 +22,7 @@
         <span class="material-header-title">Shopby</span>
         <div class="material-spacer"></div>
         <nav class="material-navigation">
-          <material-button>Products</material-button>
+          <material-button [routerLink]="RoutePaths.userProducts.toUrl()">Products</material-button>
         </nav>
         <nav class="material-navigation">
           <material-button (click)="signOut()">Sign Out</material-button>

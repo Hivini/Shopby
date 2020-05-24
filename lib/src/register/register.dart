@@ -23,7 +23,7 @@ import '../routes.dart';
 )
 class Register {
   final DatabaseHandlerService _dbService;
-  final Location _location;
+  final Router _router;
 
   String email = '';
   String password = '';
@@ -31,7 +31,7 @@ class Register {
   String phoneNumber = '';
   String deliveryDirection = '';
 
-  Register(this._dbService, this._location);
+  Register(this._dbService, this._router);
 
   void onSubmit() async {
     if (isValid()) {
@@ -39,7 +39,7 @@ class Register {
       clear();
       if (success) {
         Toast.showSuccessToast('Successful register');
-        _location.back();
+        await _router.navigate('/login');
       } else {
         Toast.showErrorToast('Account already exists');
       }

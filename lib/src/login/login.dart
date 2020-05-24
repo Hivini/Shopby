@@ -23,12 +23,12 @@ import '../routes.dart';
 )
 class Login {
   final DatabaseHandlerService _dbService;
-  final Location _location;
+  final Router _router;
 
   String email = '';
   String password = '';
 
-  Login(this._dbService, this._location);
+  Login(this._dbService, this._router);
 
   void onSubmit() async {
     if (isValid()) {
@@ -36,7 +36,7 @@ class Login {
       clear();
       if (success) {
         Toast.showSuccessToast('Successful Login');
-        _location.back();
+        await _router.navigate('/home');
       } else {
         Toast.showErrorToast('Wrong email / password');
       }

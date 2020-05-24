@@ -36,10 +36,12 @@ import 'src/home/home.dart';
 )
 class AppComponent {
   final DatabaseHandlerService dbService;
+  final Router _router;
 
-  AppComponent(this.dbService);
+  AppComponent(this.dbService, this._router);
 
   void signOut() {
     dbService.currentUser = null;
+    _router.navigate('/home');
   }
 }

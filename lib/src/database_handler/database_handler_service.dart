@@ -69,12 +69,27 @@ class DatabaseHandlerService {
         var products = data['products'];
         var resultProds = <Product>[];
         for (var prod in products) {
-          resultProds.add(transformToProduct(prod['id'], prod['title'], prod['description'], prod['imageUrl'], prod['user'], prod['rating'], prod['totalRatings']));
+          resultProds.add(transformToProduct(prod['_id'], prod['title'], prod['description'], prod['imageUrl'], prod['user'], prod['rating'], prod['totalRatings']));
         }
         return resultProds;
       } else {
         return <Product>[];
       }
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
+  Future<bool> deleteProduct(String id) async {
+    try {
+      print(id);
+      final response = await _http.delete('${_dbUrl}/products/deleteProduct', headers: {'_id': id});
+      var data = _extractData(response);
+      print(data);
+      if (data['successful'] == 1) {
+        return true;
+      }
+      return false;
     } catch (e) {
       throw Future.error(e);
     }

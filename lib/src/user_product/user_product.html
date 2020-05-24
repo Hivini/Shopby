@@ -1,6 +1,11 @@
 <h1>User Products</h1>
-<ul>
-  <li *ngFor="let prod of userProducts">
-    <product-display [product]="prod"></product-display>
-  </li>
-</ul>
+<div *ngIf="userProducts.length > 0">
+  <ul>
+    <li *ngFor="let prod of userProducts">
+      <product-display [product]="prod"></product-display>
+    </li>
+  </ul>
+</div>
+<div *ngIf="userProducts.length == 0">
+  <p>No published products.</p>
+</div>

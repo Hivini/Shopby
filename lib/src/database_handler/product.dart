@@ -4,25 +4,28 @@ class Product {
   String _productId;
   String _title;
   String _description;
+  num _price;
   String _imageUrl;
   User _user;
   num _rating;
   int _totalRatings;
 
-  Product(this._productId, this._title, this._description, this._imageUrl,
-      this._user, this._rating, this._totalRatings);
+  Product(this._productId, this._title, this._description, this._price,
+      this._imageUrl, this._user, this._rating, this._totalRatings);
 
-  String get productId => _productId;
+  String getProductId() => _productId;
 
-  String get title => _title;
+  int getTotalRatings() => _totalRatings;
 
-  String get description => _description;
+  num getRating() => _rating;
 
-  String get imageUrl => _imageUrl;
+  User getUser() => _user;
 
-  User get user => _user;
+  String getImageUrl() => _imageUrl;
 
-  num get rating => _rating;
+  num getPrice() => _price;
 
-  int get totalRatings => _totalRatings;
+  String getDescription() => _description;
+
+  String getTitle() => _title;
 }

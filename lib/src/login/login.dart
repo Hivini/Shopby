@@ -6,9 +6,6 @@ import 'package:angular_components/material_input/material_input.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:pq_toast/pq_toast.dart';
 
-import '../route_paths.dart';
-import '../routes.dart';
-
 @Component(
   selector: 'login',
   templateUrl: 'login.html',
@@ -19,7 +16,6 @@ import '../routes.dart';
     MaterialButtonComponent,
     MaterialInputComponent,
   ],
-  exports: [RoutePaths, Routes],
 )
 class Login {
   final DatabaseHandlerService _dbService;

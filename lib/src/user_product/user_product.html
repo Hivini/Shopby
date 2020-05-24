@@ -1,8 +1,9 @@
 <h1>User Products</h1>
+<material-button raised class="blue" (click)="showRegisterProduct()">Add Product</material-button>
 <div *ngIf="userProducts.length > 0">
   <ul>
     <li *ngFor="let prod of userProducts">
-      <product-display [product]="prod"></product-display>
+      <product-display [product]="prod" (reload)="loadUserProducts()"></product-display>
     </li>
   </ul>
 </div>

@@ -1,6 +1,7 @@
 <div *ngIf="product != null">
-  <h1>{{product.title}}</h1>
-  <p>Vendor {{product.user.name}}</p>
-  <p>{{product.description}}</p>
-  <material-button (click)="removeProduct()">Remove product</material-button>
+  <h1>{{product.getTitle()}}</h1>
+  <p>Vendor {{product.getUser().getName()}}</p>
+  <p>{{product.getDescription()}}</p>
+  <p>{{product.getPrice()}}</p>
+  <material-button raised (click)="removeProduct()">Remove product</material-button>
 </div>

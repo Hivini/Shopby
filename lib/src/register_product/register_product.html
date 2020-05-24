@@ -1,0 +1,59 @@
+<div class="container">
+  <h1>Product information</h1>
+  <form>
+    <div class="form-group">
+      <material-input type="text"
+                      class="form-control"
+                      id="title"
+                      floatingLabel
+                      label="Title"
+                      required
+                      [(ngModel)]="title"
+      >
+      </material-input>
+    </div>
+
+    <div class="form-group">
+      <material-input type="description"
+                      class="form-control"
+                      id="description"
+                      label="Description"
+                      floatingLabel
+                      required
+                      [(ngModel)]="description"
+      >
+      </material-input>
+    </div>
+
+    <div class="form-group">
+      <material-input type="number"
+                      class="form-control"
+                      id="price"
+                      floatingLabel
+                      label="Price"
+                      required
+                      [(ngModel)]="price"
+      >
+      </material-input>
+    </div>
+
+    <div class="form-group">
+      <material-input type="text"
+                      class="form-control"
+                      id="imageUrl"
+                      floatingLabel
+                      label="Image URL"
+                      required
+                      [(ngModel)]="imageUrl"
+      >
+      </material-input>
+    </div>
+
+    <div class="row">
+      <div class="col-auto">
+        <material-button raised (click)="onSubmit()">Submit</material-button>
+      </div>
+    </div>
+  </form>
+</div>
+

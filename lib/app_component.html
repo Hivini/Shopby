@@ -5,6 +5,9 @@
         <span class="material-header-title">Shopby</span>
         <div class="material-spacer"></div>
         <nav class="material-navigation">
+          <material-button [routerLink]="RoutePaths.home.toUrl()">
+            Home
+          </material-button>
           <material-button [routerLink]="RoutePaths.login.toUrl()">
             Login
           </material-button>
@@ -21,6 +24,9 @@
       <div class="material-header-row">
         <span class="material-header-title">Shopby</span>
         <div class="material-spacer"></div>
+        <material-button [routerLink]="RoutePaths.home.toUrl()">
+          Home
+        </material-button>
         <nav class="material-navigation">
           <material-button [routerLink]="RoutePaths.userProducts.toUrl()">Products</material-button>
         </nav>

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:Shopby/src/database_handler/database_handler_service.dart';
 import 'package:Shopby/src/database_handler/product.dart';
 import 'package:angular/angular.dart';
@@ -14,16 +16,21 @@ import 'package:pq_toast/pq_toast.dart';
 )
 class ProductDisplay {
   final DatabaseHandlerService _dbService;
+  final _deleteRequest = StreamController<String>();
 
   @Input()
   Product product;
 
+  @Output()
+  Stream<String> get reload => _deleteRequest.stream;
+
   ProductDisplay(this._dbService);
 
   void removeProduct() async {
-    var response = await _dbService.deleteProduct(product.productId);
+    var response = await _dbService.deleteProduct(product.getProductId());
     if (response) {
       Toast.showInfoToast('Deleted product');
+      _deleteRequest.add('reload');
     } else {
       Toast.showErrorToast('An error encountered when deleting the product');
     }

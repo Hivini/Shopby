@@ -61,6 +61,27 @@ class DatabaseHandlerService {
     }
   }
 
+  Future<bool> registerProduct(String email, String title, String description, num price, String imageUrl) async {
+    try {
+      var body = {
+        'email': email,
+        'title': title,
+        'description': description,
+        'price': price.toString(),
+        'imageUrl': imageUrl
+      };
+      var response = await _http.post('${_dbUrl}/products/registerProduct', body: body);
+      var data = _extractData(response);
+      print(data);
+      if (data['successful'] == 1) {
+        return true;
+      }
+      return false;
+    } catch(e) {
+      throw Future.error(e);
+    }
+  }
+
   Future<List<Product>> getProductsByUser(String email) async {
     try {
       final response = await _http.get('${_dbUrl}/products/getAllProductsByUser', headers: {'email': email});
@@ -69,7 +90,7 @@ class DatabaseHandlerService {
         var products = data['products'];
         var resultProds = <Product>[];
         for (var prod in products) {
-          resultProds.add(transformToProduct(prod['_id'], prod['title'], prod['description'], prod['imageUrl'], prod['user'], prod['rating'], prod['totalRatings']));
+          resultProds.add(transformToProduct(prod['_id'], prod['title'], prod['description'], prod['price'], prod['imageUrl'], prod['user'], prod['rating'], prod['totalRatings']));
         }
         return resultProds;
       } else {
@@ -99,8 +120,8 @@ class DatabaseHandlerService {
     return User(email, name, int.parse(role), phoneNumber, deliveryDirection);
   }
 
-  Product transformToProduct(productId, title, description, imageUrl, user, rating, totalRatings) {
-    return Product(productId, title, description, imageUrl,
+  Product transformToProduct(productId, title, description, price, imageUrl, user, rating, totalRatings) {
+    return Product(productId, title, description, price, imageUrl,
         transformToUser(user['email'], user['name'], user['role'],
             user['phoneNumber'], user['deliveryDirection']),
         rating, totalRatings);

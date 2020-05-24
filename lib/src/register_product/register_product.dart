@@ -7,51 +7,44 @@ import 'package:angular_router/angular_router.dart';
 import 'package:pq_toast/pq_toast.dart';
 
 @Component(
-  selector: 'register',
-  templateUrl: 'register.html',
+  selector: 'register-product',
+  templateUrl: 'register_product.html',
   directives: [
     coreDirectives,
     formDirectives,
     materialInputDirectives,
+    materialNumberInputDirectives,
     MaterialButtonComponent,
     MaterialInputComponent,
   ],
 )
-class Register {
+class RegisterProduct {
   final DatabaseHandlerService _dbService;
   final Router _router;
 
-  String email = '';
-  String password = '';
-  String name = '';
-  String phoneNumber = '';
-  String deliveryDirection = '';
+  String title = '';
+  String description = '';
+  num price = 0.0;
+  String imageUrl = '';
 
-  Register(this._dbService, this._router);
+  RegisterProduct(this._dbService, this._router);
 
   void onSubmit() async {
     if (isValid()) {
-      var success = await _dbService.registerUser(email, password, name, phoneNumber, deliveryDirection);
-      clear();
-      if (success) {
-        Toast.showSuccessToast('Successful register');
-        await _router.navigate('/login');
+      var response = await _dbService.registerProduct(_dbService.currentUser.getEmail(), title, description, price, imageUrl);
+      if (response) {
+        Toast.showSuccessToast('Product has been registered');
+        await _router.navigate('/userProducts');
       } else {
-        Toast.showErrorToast('Account already exists');
+        Toast.showErrorToast('An error has occurred when registering product.');
       }
+    } else {
+      Toast.showWarningToast('Complete all the fields');
     }
   }
 
-  void clear() {
-    email = '';
-    password = '';
-    name = '';
-    phoneNumber = '';
-    deliveryDirection = '';
-  }
-
   bool isValid() {
-    if (email == '' && password == '' && name == '' && phoneNumber == '' && deliveryDirection == '') {
+    if (title == '' && description == '' && price < 1 && imageUrl == '') {
       return false;
     }
     return true;

@@ -18,7 +18,6 @@ class DatabaseHandlerService {
   Future<User> getUser(String email) async {
     try {
       final response = await _http.get('${_dbUrl}/users/getByEmail', headers: {'email': email});
-      print(_extractData(response));
     } catch(e) {
       throw Future.error(e);
     }
@@ -52,7 +51,6 @@ class DatabaseHandlerService {
       final response = await _http.post('${_dbUrl}/users/registerUser', body: body);
       var data = _extractData(response);
       if (data['successful'] == 1) {
-        print('sucessfulRegister');
         return true;
       }
       return false;
@@ -72,7 +70,6 @@ class DatabaseHandlerService {
       };
       var response = await _http.post('${_dbUrl}/products/registerProduct', body: body);
       var data = _extractData(response);
-      print(data);
       if (data['successful'] == 1) {
         return true;
       }
@@ -103,14 +100,31 @@ class DatabaseHandlerService {
 
   Future<bool> deleteProduct(String id) async {
     try {
-      print(id);
       final response = await _http.delete('${_dbUrl}/products/deleteProduct', headers: {'_id': id});
       var data = _extractData(response);
-      print(data);
       if (data['successful'] == 1) {
         return true;
       }
       return false;
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
+  Future<List<Product>> searchProducts(String query) async {
+    try {
+      var response = await _http.get('${_dbUrl}/products/searchProduct', headers: {'query': query});
+      var data = _extractData(response);
+      if (data['successful'] == 1 && data['products'].length > 0) {
+        var products = data['products'];
+        var resultProds = <Product>[];
+        for (var prod in products) {
+          resultProds.add(transformToProduct(prod['_id'], prod['title'], prod['description'], prod['price'], prod['imageUrl'], prod['user'], prod['rating'], prod['totalRatings']));
+        }
+        return resultProds;
+      } else {
+        return <Product>[];
+      }
     } catch (e) {
       throw Future.error(e);
     }

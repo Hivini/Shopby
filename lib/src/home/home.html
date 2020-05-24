@@ -1,1 +1,26 @@
-<h1>Hello {{name}}</h1>
+<div *ngIf="dbService.currentUser != null">
+  <form>
+    <div class="form-group">
+      <material-input type="text"
+                      class="form-control"
+                      id="search"
+                      floatingLabel
+                      label="Search Products"
+                      [(ngModel)]="searchQuery"
+      >
+      </material-input>
+    </div>
+    <material-button raised
+                     (click)="searchProducts()">Search
+    </material-button>
+  </form>
+  <div *ngIf="searchedProducts.length > 0">
+    <p>Search results:</p>
+    <div *ngFor="let prod of searchedProducts">
+      <product-display [product]="prod"></product-display>
+    </div>
+  </div>
+</div>
+<div *ngIf="dbService.currentUser == null">
+  <h1>Login to search for products</h1>
+</div>

@@ -1,0 +1,79 @@
+<div>
+  <material-drawer persistent #drawer="drawer">
+    <material-list *deferredContent>
+      <div group class="mat-drawer-spacer"></div>
+      <div group>
+        <div label>Chats</div>
+        <div *ngFor="let usr of from">
+          <material-list-item (trigger)="setMessages(usr)">
+            <material-icon icon="person_pin"></material-icon>{{usr}}
+          </material-list-item>
+        </div>
+      </div>
+    </material-list>
+  </material-drawer>
+  <div class="material-content">
+    <material-button raised (trigger)="showNewChatDialog = true">New chat</material-button>
+    <modal [(visible)]="showNewChatDialog">
+      <material-dialog class="basic-dialog">
+
+        <h1 header>Start new chat</h1>
+
+        <form>
+          <div class="form-group">
+            <material-input type="email"
+                            class="form-control"
+                            id="email"
+                            floatingLabel
+                            label="Receiver Email"
+                            required
+                            [(ngModel)]="receiverEmail"
+            >
+            </material-input>
+          </div>
+          <div class="form-group">
+            <material-input type="text"
+                            class="form-control"
+                            id="receiverMessage"
+                            floatingLabel
+                            label="Message content"
+                            required
+                            [(ngModel)]="receiverMessage"
+            >
+            </material-input>
+          </div>
+        </form>
+
+        <div footer>
+          <material-button autoFocus clear-size raised (trigger)="showNewChatDialog = false">
+            Close
+          </material-button>
+          <material-button autoFocus clear-size raised (trigger)="processNewChat()">
+            Send
+          </material-button>
+        </div>
+
+      </material-dialog>
+    </modal>
+    <div *ngFor="let message of messages">
+      <message-display [message]="message"></message-display>
+    </div>
+    <div *ngIf="selectedUser != ''">
+      <form>
+        <div class="form-group">
+          <material-input type="text"
+                          class="form-control"
+                          id="newMessage"
+                          label="New Message"
+                          required
+                          [(ngModel)]="newMessage"
+          >
+          </material-input>
+          <material-button autoFocus clear-size raised (trigger)="sendMessage()">
+            Send
+          </material-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

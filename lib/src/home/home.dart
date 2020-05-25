@@ -23,14 +23,20 @@ class HomeComponent {
   final DatabaseHandlerService dbService;
   final Router _router;
 
+  String previousSearch = '';
   String searchQuery = '';
   List<Product> searchedProducts = [];
 
   HomeComponent(this.dbService, this._router);
 
   void searchProducts() async {
-    var prods = await dbService.searchProducts(searchQuery);
+    var query = searchQuery;
+    if (searchedProducts != null && previousSearch != '') {
+      query = previousSearch;
+    }
+    var prods = await dbService.searchProducts(query);
     searchedProducts = [];
+    previousSearch = '';
     searchQuery = '';
     if (prods.isNotEmpty) {
       searchedProducts.addAll(prods);

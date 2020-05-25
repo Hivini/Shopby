@@ -3,5 +3,8 @@
   <p>Vendor {{product.getUser().getName()}}</p>
   <p>{{product.getDescription()}}</p>
   <p>{{product.getPrice()}}</p>
-  <material-button raised (click)="removeProduct()">Remove product</material-button>
+  <img [src]="product.getImageUrl()">
+  <div *ngIf="showRemoveButton">
+    <material-button raised (click)="removeProduct()">Remove product</material-button>
+  </div>
 </div>

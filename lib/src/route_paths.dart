@@ -6,4 +6,6 @@ class RoutePaths {
   static final home = RoutePath(path: 'home');
   static final userProducts = RoutePath(path: 'userProducts');
   static final registerProduct = RoutePath(path: 'registerProduct');
+  static final chatWindow = RoutePath(path: 'chatWindow');
+  static final statistics = RoutePath(path: 'statistics');
 }

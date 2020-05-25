@@ -24,11 +24,21 @@
       <div class="material-header-row">
         <span class="material-header-title">Shopby</span>
         <div class="material-spacer"></div>
-        <material-button [routerLink]="RoutePaths.home.toUrl()">
-          Home
-        </material-button>
         <nav class="material-navigation">
+          <material-button [routerLink]="RoutePaths.home.toUrl()">
+            Home
+          </material-button>
+        </nav>
+        <nav class="material-navigation">
+          <material-button [routerLink]="RoutePaths.chatWindow.toUrl()">
+            Chat
+          </material-button>
+        </nav>
+        <nav class="material-navigation" *ngIf="dbService.currentUser.role == 0">
           <material-button [routerLink]="RoutePaths.userProducts.toUrl()">Products</material-button>
+        </nav>
+        <nav class="material-navigation" *ngIf="dbService.currentUser.role == 2">
+          <material-button [routerLink]="RoutePaths.statistics.toUrl()">Statistics</material-button>
         </nav>
         <nav class="material-navigation">
           <material-button (click)="signOut()">Sign Out</material-button>

@@ -21,6 +21,9 @@ class ProductDisplay {
   @Input()
   Product product;
 
+  @Input()
+  bool showRemoveButton = false;
+
   @Output()
   Stream<String> get reload => _deleteRequest.stream;
 

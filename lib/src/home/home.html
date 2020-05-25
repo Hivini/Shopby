@@ -17,7 +17,7 @@
   <div *ngIf="searchedProducts.length > 0">
     <p>Search results:</p>
     <div *ngFor="let prod of searchedProducts">
-      <product-display [product]="prod"></product-display>
+      <product-display [product]="prod" [showRemoveButton]="dbService.currentUser.role > 0" (reload)="searchProducts()"></product-display>
     </div>
   </div>
 </div>

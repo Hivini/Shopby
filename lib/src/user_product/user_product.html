@@ -3,7 +3,7 @@
 <div *ngIf="userProducts.length > 0">
   <ul>
     <li *ngFor="let prod of userProducts">
-      <product-display [product]="prod" (reload)="loadUserProducts()"></product-display>
+      <product-display [product]="prod" [showRemoveButton]="true" (reload)="loadUserProducts()"></product-display>
     </li>
   </ul>
 </div>

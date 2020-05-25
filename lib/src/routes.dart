@@ -6,6 +6,8 @@ import 'login/login.template.dart' as login_template;
 import 'register/register.template.dart' as register_template;
 import 'user_product/user_product.template.dart' as user_product_template;
 import 'register_product/register_product.template.dart' as register_product_template;
+import 'chat_window/chat_window.template.dart' as chat_window_template;
+import 'statistics_page/statistics_page.template.dart' as statistics_page_template;
 
 export 'route_paths.dart';
 
@@ -36,12 +38,24 @@ class Routes {
     component: register_product_template.RegisterProductNgFactory,
   );
 
+  static final chatWindow = RouteDefinition(
+    routePath: RoutePaths.chatWindow,
+    component: chat_window_template.ChatWindowNgFactory,
+  );
+
+  static final statisticsPage = RouteDefinition(
+    routePath: RoutePaths.statistics,
+    component: statistics_page_template.StatisticsPageNgFactory,
+  );
+
   static final all = <RouteDefinition>[
     home,
     login,
     register,
     userProducts,
     registerProduct,
+    chatWindow,
+    statisticsPage,
     RouteDefinition.redirect(
       path: '',
       redirectTo: RoutePaths.home.toUrl()

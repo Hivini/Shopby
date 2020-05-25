@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:Shopby/src/database_handler/message.dart';
 import 'package:Shopby/src/database_handler/product.dart';
 import 'package:Shopby/src/database_handler/user.dart';
 import 'package:Shopby/config/credentials.dart' as credentials;
@@ -14,14 +15,6 @@ class DatabaseHandlerService {
   DatabaseHandlerService(this._http);
 
   dynamic _extractData(Response resp) => json.decode(resp.body);
-
-  Future<User> getUser(String email) async {
-    try {
-      final response = await _http.get('${_dbUrl}/users/getByEmail', headers: {'email': email});
-    } catch(e) {
-      throw Future.error(e);
-    }
-  }
 
   Future<bool> login(String email, String password) async {
     try {
@@ -130,6 +123,58 @@ class DatabaseHandlerService {
     }
   }
 
+  Future<Map<String, List<Message>>> getUserMessages(String user) async {
+    try {
+      var response = await _http.get('${_dbUrl}/chat/getUserMessages', headers: {'user': user});
+      var data = _extractData(response);
+      if (data.length > 0) {
+        var resultMessages = <String, List<Message>>{};
+        for (var d in data) {
+          var messages = d['messages'];
+          var users = d['users'];
+          var otherUser = users[0] != user ? users[0] : users[1];
+          resultMessages[otherUser] = <Message>[];
+          for (var msg in messages) {
+            resultMessages[otherUser].add(transformToMessage(msg['from'], msg['message'], msg['timestamp']));
+          }
+        }
+        return resultMessages;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
+  Future<bool> sendNewMessage(String to, String from, String message) async {
+    try {
+      var response = await _http.post('${_dbUrl}/chat/saveMessage', headers: {'to': to, 'from': from, 'message': message});
+      var data = _extractData(response);
+      if (data['successful'] == 1) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
+  Future<List<num>> getStatistics() async {
+    try {
+      var response = await _http.get('${_dbUrl}/users/getStatistics');
+      var data = _extractData(response);
+      var lst = <num>[];
+      lst.add(data[0]);
+      lst.add(data[1]);
+      lst.add(data[2]);
+      lst.add(0);
+      return lst;
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
   User transformToUser(String email, String name, String role, String phoneNumber, String deliveryDirection) {
     return User(email, name, int.parse(role), phoneNumber, deliveryDirection);
   }
@@ -139,5 +184,9 @@ class DatabaseHandlerService {
         transformToUser(user['email'], user['name'], user['role'],
             user['phoneNumber'], user['deliveryDirection']),
         rating, totalRatings);
+  }
+
+  Message transformToMessage(String from, String message, num timestamp) {
+    return Message(timestamp, from, message);
   }
 }

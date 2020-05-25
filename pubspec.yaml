@@ -13,6 +13,7 @@ dependencies:
   angular_router: ^2.0.0-alpha
   meta: ^1.1.8
   pq_toast: any
+  chartjs: ^0.5.1
 
 dev_dependencies:
   angular_test: ^2.3.0

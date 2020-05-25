@@ -9,9 +9,25 @@ import 'package:pq_toast/pq_toast.dart';
 @Component(
   selector: 'product-display',
   templateUrl: 'product_display.html',
+  providers: [overlayBindings],
   directives: [
+    AutoDismissDirective,
+    AutoFocusDirective,
     coreDirectives,
+    DeferredContentDirective,
     MaterialButtonComponent,
+    MaterialIconComponent,
+    MaterialPersistentDrawerDirective,
+    MaterialToggleComponent,
+    MaterialListComponent,
+    MaterialListItemComponent,
+    MaterialDialogComponent,
+    MaterialInputComponent,
+    ModalComponent,
+  ],
+  styleUrls: [
+    '../../app_component.css',
+    'package:angular_components/app_layout/layout.scss.css',
   ],
 )
 class ProductDisplay {
@@ -27,6 +43,8 @@ class ProductDisplay {
   @Output()
   Stream<String> get reload => _deleteRequest.stream;
 
+  bool showProductDialog = false;
+
   ProductDisplay(this._dbService);
 
   void removeProduct() async {
@@ -37,5 +55,9 @@ class ProductDisplay {
     } else {
       Toast.showErrorToast('An error encountered when deleting the product');
     }
+  }
+
+  void buyProduct() {
+    print('Buying product');
   }
 }

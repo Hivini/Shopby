@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:Shopby/src/database_handler/message.dart';
+import 'package:Shopby/src/database_handler/privileged_user.dart';
 import 'package:Shopby/src/database_handler/product.dart';
 import 'package:Shopby/src/database_handler/user.dart';
 import 'package:Shopby/config/credentials.dart' as credentials;
@@ -35,7 +36,6 @@ class DatabaseHandlerService {
       var body = {
         'email': email,
         'password': password,
-        'phoneNumber': password,
         'name': name,
         'role': '0',
         'phoneNumber': phoneNumber,
@@ -170,6 +170,27 @@ class DatabaseHandlerService {
       lst.add(data[2]);
       lst.add(0);
       return lst;
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
+  Future<bool> registerModerator(email, password, name) async {
+    try {
+      var body = {
+        'email': email,
+        'password': password,
+        'name': name,
+        'role': '1',
+        'phoneNumber': '',
+        'deliveryDirection': '',
+      };
+      final response = await _http.post('${_dbUrl}/users/registerUser', body: body);
+      var data = _extractData(response);
+      if (data['successful'] == 1) {
+        return true;
+      }
+      return false;
     } catch (e) {
       throw Future.error(e);
     }

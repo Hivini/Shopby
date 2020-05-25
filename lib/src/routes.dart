@@ -8,6 +8,8 @@ import 'user_product/user_product.template.dart' as user_product_template;
 import 'register_product/register_product.template.dart' as register_product_template;
 import 'chat_window/chat_window.template.dart' as chat_window_template;
 import 'statistics_page/statistics_page.template.dart' as statistics_page_template;
+import 'register_moderator/register_moderator.template.dart' as register_moderator_template;
+import 'user_history/user_history.template.dart' as user_history_template;
 
 export 'route_paths.dart';
 
@@ -48,6 +50,16 @@ class Routes {
     component: statistics_page_template.StatisticsPageNgFactory,
   );
 
+  static final registerModerator = RouteDefinition(
+    routePath: RoutePaths.registerModerator,
+    component: register_moderator_template.RegisterModeratorNgFactory,
+  );
+
+  static final userHistory = RouteDefinition(
+    routePath: RoutePaths.userHistory,
+    component: user_history_template.UserHistoryNgFactory,
+  );
+
   static final all = <RouteDefinition>[
     home,
     login,
@@ -56,6 +68,8 @@ class Routes {
     registerProduct,
     chatWindow,
     statisticsPage,
+    registerModerator,
+    userHistory,
     RouteDefinition.redirect(
       path: '',
       redirectTo: RoutePaths.home.toUrl()

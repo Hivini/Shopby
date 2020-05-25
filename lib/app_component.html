@@ -30,12 +30,20 @@
           </material-button>
         </nav>
         <nav class="material-navigation">
-          <material-button [routerLink]="RoutePaths.chatWindow.toUrl()">
+          <material-button [routerLink]="RoutePaths.chatWindow.toUrl()" *ngIf="dbService.currentUser.role < 2">
             Chat
+          </material-button>
+        </nav>
+        <nav class="material-navigation">
+          <material-button [routerLink]="RoutePaths.registerModerator.toUrl()" *ngIf="dbService.currentUser.role == 2">
+            Add Moderator
           </material-button>
         </nav>
         <nav class="material-navigation" *ngIf="dbService.currentUser.role == 0">
           <material-button [routerLink]="RoutePaths.userProducts.toUrl()">Products</material-button>
+        </nav>
+        <nav class="material-navigation" *ngIf="dbService.currentUser.role == 0">
+          <material-button [routerLink]="RoutePaths.userHistory.toUrl()">Buy History</material-button>
         </nav>
         <nav class="material-navigation" *ngIf="dbService.currentUser.role == 2">
           <material-button [routerLink]="RoutePaths.statistics.toUrl()">Statistics</material-button>

@@ -8,4 +8,6 @@ class RoutePaths {
   static final registerProduct = RoutePath(path: 'registerProduct');
   static final chatWindow = RoutePath(path: 'chatWindow');
   static final statistics = RoutePath(path: 'statistics');
+  static final registerModerator = RoutePath(path: 'registerModerator');
+  static final userHistory = RoutePath(path: 'userHistory');
 }

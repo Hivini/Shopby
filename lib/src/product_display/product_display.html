@@ -1,10 +1,25 @@
 <div *ngIf="product != null">
-  <h1>{{product.getTitle()}}</h1>
-  <p>Vendor {{product.getUser().getName()}}</p>
-  <p>{{product.getDescription()}}</p>
-  <p>{{product.getPrice()}}</p>
-  <img [src]="product.getImageUrl()">
+  <material-button (trigger)="showProductDialog = true"><h1>{{product.getTitle()}}</h1></material-button>
+  <img [src]="product.getImageUrl()" class="productSmallImage">
+  <p>Vendor: {{product.getUser().getName()}}</p>
   <div *ngIf="showRemoveButton">
     <material-button raised (click)="removeProduct()">Remove product</material-button>
   </div>
+  <modal [(visible)]="showProductDialog">
+    <material-dialog class="basic-dialog">
+
+      <h1 header>Product Information</h1>
+
+      <p>Product info</p>
+
+      <div footer>
+        <material-button autoFocus clear-size raised (trigger)="showProductDialog = false">
+          Close
+        </material-button>
+        <material-button autoFocus clear-size raised (trigger)="buyProduct()">
+          Buy
+        </material-button>
+      </div>
+    </material-dialog>
+  </modal>
 </div>

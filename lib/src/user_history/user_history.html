@@ -1,1 +1,8 @@
-<p>User History</p>
+<div *ngIf="historyItems.length > 0">
+  <div *ngFor="let hst of historyItems">
+    <p>{{hst.title}}</p>
+  </div>
+</div>
+<div *ngIf="historyItems.length == 0">
+  <h4>No items bought yet.</h4>
+</div>

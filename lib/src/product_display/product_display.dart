@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:Shopby/src/database_handler/database_handler_service.dart';
 import 'package:Shopby/src/database_handler/product.dart';
+import 'package:Shopby/src/rating_handler/rating_handler.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:pq_toast/pq_toast.dart';
@@ -24,6 +25,7 @@ import 'package:pq_toast/pq_toast.dart';
     MaterialDialogComponent,
     MaterialInputComponent,
     ModalComponent,
+    RatingHandler,
   ],
   styleUrls: [
     '../../app_component.css',
@@ -45,6 +47,8 @@ class ProductDisplay {
 
   bool showProductDialog = false;
 
+  bool showRatingsHandler = false;
+
   ProductDisplay(this._dbService);
 
   void removeProduct() async {
@@ -57,7 +61,14 @@ class ProductDisplay {
     }
   }
 
-  void buyProduct() {
-    print('Buying product');
+  void buyProduct() async {
+    var response = await _dbService.addToUserHistory(_dbService.currentUser.getEmail(), product);
+    showProductDialog = false;
+    showRatingsHandler = true;
+    if (response) {
+      Toast.showSuccessToast('Product has been bought');
+    } else {
+      Toast.showErrorToast('There was a problem when buying the product');
+    }
   }
 }

@@ -23,3 +23,10 @@
     </material-dialog>
   </modal>
 </div>
+<modal [(visible)]="showRatingsHandler">
+  <material-dialog class="basic-dialog">
+    <h1 header>Choose product rating</h1>
+    <rating-handler [productId]="product.getProductId()" (finished)="showRatingsHandler = false"></rating-handler>
+  </material-dialog>
+</modal>
+

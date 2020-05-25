@@ -7,6 +7,8 @@ import 'package:Shopby/src/database_handler/user.dart';
 import 'package:Shopby/config/credentials.dart' as credentials;
 import 'package:http/http.dart';
 
+import 'history.dart';
+
 class DatabaseHandlerService {
   static final _headers = {'Content-Type': 'application/json'};
   static const _dbUrl = credentials.dbUrl; // URL to web API
@@ -191,6 +193,44 @@ class DatabaseHandlerService {
         return true;
       }
       return false;
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
+  Future<bool> addToUserHistory(String email, Product product) async {
+    try {
+      var response = await _http.post('${_dbUrl}/users/addUserHistory', headers:
+      {'email': email, 'title': product.getTitle(),
+        'vendor': product.getUser().getEmail(),
+        'price': product.getPrice().toString()});
+      var data = _extractData(response);
+      if (data['successful'] == 1) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
+  History transformToHistory(num timestamp, String email, String title, String vendor, num price) {
+    return History(timestamp, email, title, vendor, price);
+  }
+
+  Future<List<History>> getUserHistory(String email) async {
+    try {
+      var response = await _http.get('${_dbUrl}/users/getUserHistory', headers: {'email': email});
+      var data = _extractData(response);
+      if (data.length > 0) {
+        var resultHistory = <History>[];
+        for (var d in data) {
+          resultHistory.add(transformToHistory(d['timestamp'], d['email'], d['title'], d['vendor'], d['price']));
+        }
+        return resultHistory;
+      } else {
+        return null;
+      }
     } catch (e) {
       throw Future.error(e);
     }

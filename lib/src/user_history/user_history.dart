@@ -18,14 +18,18 @@ import 'package:angular_components/angular_components.dart';
 class UserHistory implements  OnInit {
   final DatabaseHandlerService _dbService;
 
-  List<History> historyItems;
+  List<History> historyItems = <History>[];
 
   bool showProductDialog = false;
 
   UserHistory(this._dbService);
 
   @override
-  void ngOnInit() {
-    // TODO: implement ngOnInit
+  void ngOnInit() async {
+    historyItems = <History>[];
+    var resp = await _dbService.getUserHistory(_dbService.currentUser.getEmail());
+    if (resp != null) {
+      historyItems.addAll(resp);
+    }
   }
 }

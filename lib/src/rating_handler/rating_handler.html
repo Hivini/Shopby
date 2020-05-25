@@ -1,0 +1,4 @@
+<div class="stars" *ngFor="let star of stars">
+  <material-button clear-size (click)="handleClick(star)"><span [ngClass]="starClass(star)">{{starChar(star)}}</span></material-button>
+</div>
+<materia-button raised (click)="addToRatings()">Submit</materia-button>

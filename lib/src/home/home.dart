@@ -18,6 +18,10 @@ import 'package:pq_toast/pq_toast.dart';
     MaterialButtonComponent,
     ProductDisplay,
   ],
+  styleUrls: [
+    '../../app_component.css',
+    'package:angular_components/app_layout/layout.scss.css',
+  ],
 )
 class HomeComponent {
   final DatabaseHandlerService dbService;

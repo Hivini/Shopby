@@ -8,7 +8,9 @@ import 'package:pq_toast/pq_toast.dart';
     selector: 'rating-handler',
     templateUrl: 'rating_handler.html',
     styleUrls: [
-      'rating_handler.css'
+      'rating_handler.css',
+      '../../app_component.css',
+      'package:angular_components/app_layout/layout.scss.css',
     ],
   directives: [
     coreDirectives,

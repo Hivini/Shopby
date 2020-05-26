@@ -1,8 +1,17 @@
-<div *ngIf="historyItems.length > 0">
-  <div *ngFor="let hst of historyItems">
-    <p>{{hst.title}}</p>
+<div class="history-container">
+  <div *ngIf="historyItems.length > 0">
+    <div *ngFor="let hst of historyItems">
+      <div class="right-align">
+        <p><strong>Purchase Date</strong></p>
+        <p class="dateDisplay">{{formatDate(hst.timestamp)}}</p>
+      </div>
+      <p>{{hst.title}}</p>
+      <p><strong>Vendor: </strong> {{hst.vendor}}</p>
+      <p><strong><i>Price: {{hst.price}}</i></strong></p>
+      <hr style="width:80%;text-align:left;margin-left:0">
+    </div>
   </div>
-</div>
-<div *ngIf="historyItems.length == 0">
-  <h4>No items bought yet.</h4>
+  <div *ngIf="historyItems.length == 0">
+    <h4>No items bought yet.</h4>
+  </div>
 </div>

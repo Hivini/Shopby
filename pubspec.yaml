@@ -14,6 +14,7 @@ dependencies:
   meta: ^1.1.8
   pq_toast: any
   chartjs: ^0.5.1
+  intl: any
 
 dev_dependencies:
   angular_test: ^2.3.0

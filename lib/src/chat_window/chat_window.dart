@@ -58,7 +58,9 @@ class ChatWindow implements OnInit {
     from = <String>[];
     currentUser = _dbService.currentUser;
     messagesMap = await _dbService.getUserMessages(currentUser.getEmail());
-    from.addAll(messagesMap.keys);
+    if (messagesMap != null) {
+      from.addAll(messagesMap.keys);
+    }
   }
 
   void setMessages(String usr) {

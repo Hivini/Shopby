@@ -13,6 +13,10 @@ import 'package:angular_router/angular_router.dart';
     MaterialButtonComponent,
     ProductDisplay,
   ],
+  styleUrls: [
+    '../../app_component.css',
+    'package:angular_components/app_layout/layout.scss.css',
+  ],
 )
 class UserProduct implements OnInit {
   final DatabaseHandlerService _dbService;

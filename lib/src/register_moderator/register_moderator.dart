@@ -19,6 +19,8 @@ import 'package:pq_toast/pq_toast.dart';
   styleUrls: [
     'register_moderator.css',
     'package:angular_components/app_layout/layout.scss.css',
+    '../../app_component.css',
+    'package:angular_components/css/mdc_web/card/mdc-card.scss.css',
   ],
 )
 class RegisterModerator {

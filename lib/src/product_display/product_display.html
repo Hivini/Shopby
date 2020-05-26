@@ -3,22 +3,27 @@
   <img [src]="product.getImageUrl()" class="productSmallImage">
   <p>Vendor: {{product.getUser().getName()}}</p>
   <div *ngIf="showRemoveButton">
-    <material-button raised (click)="removeProduct()">Remove product</material-button>
+    <material-button raised class="remove-button" (click)="removeProduct()">Remove product</material-button>
   </div>
   <modal [(visible)]="showProductDialog">
     <material-dialog class="basic-dialog">
 
       <h1 header>Product Information</h1>
-
-      <p>Product info</p>
-      <p>{{product.getRating()}}</p>
-      <p>{{product.getTotalRatings()}}</p>
+      <h3>{{product.getTitle()}}</h3>
+      <p>{{product.getDescription()}}</p>
+      <p><strong>Price: $</strong> {{product.getPrice()}}</p>
+      <div *ngIf="product.getRating() > 0">
+        <p><strong>Average Ratings: </strong><i>{{product.getTotalRatings() / product.getRating()}}</i></p>
+      </div>
+      <div *ngIf="product.getRating() == 0">
+        <p><strong><i>No ratings yet.</i></strong></p>
+      </div>
 
       <div footer>
-        <material-button autoFocus clear-size raised (trigger)="showProductDialog = false">
+        <material-button autoFocus class="exitButton" raised (trigger)="showProductDialog = false">
           Close
         </material-button>
-        <material-button autoFocus clear-size raised (trigger)="buyProduct()">
+        <material-button autoFocus class="subButton" clear-size raised (trigger)="buyProduct()">
           Buy
         </material-button>
       </div>

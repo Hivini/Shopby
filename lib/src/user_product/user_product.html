@@ -1,12 +1,14 @@
-<h1>User Products</h1>
-<material-button raised class="blue" (click)="showRegisterProduct()">Add Product</material-button>
-<div *ngIf="userProducts.length > 0">
-  <ul>
-    <li *ngFor="let prod of userProducts">
-      <product-display [product]="prod" [showRemoveButton]="true" (reload)="loadUserProducts()"></product-display>
-    </li>
-  </ul>
-</div>
-<div *ngIf="userProducts.length == 0">
-  <p>No published products.</p>
+<div class="history-container">
+  <h1>User Products</h1>
+  <material-button raised class="blue" (click)="showRegisterProduct()">Add Product</material-button>
+  <div *ngIf="userProducts.length > 0">
+    <ul>
+      <li *ngFor="let prod of userProducts">
+        <product-display [product]="prod" [showRemoveButton]="true" (reload)="loadUserProducts()"></product-display>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="userProducts.length == 0">
+    <p>No published products.</p>
+  </div>
 </div>

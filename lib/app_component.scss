@@ -19,3 +19,42 @@
   width: 70px;
   height: 70px;
 }
+
+.center-container {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+.center-container material-input {
+  text-align: left;
+  width: 300px;
+}
+
+.subButton {
+  background-color: #e6f5ff;
+  padding: 2px;
+}
+
+.exitButton {
+  background-color: #ffecea;
+  margin-right: 20px;
+  padding: 2px;
+}
+
+.right-align {
+  width: 70%;
+  text-align: right;
+}
+
+.history-container {
+  margin-left: 50px;
+}
+
+#search {
+  width: 500px;
+}
+
+.remove-button {
+  background-color: #ff9189;
+}

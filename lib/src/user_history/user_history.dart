@@ -2,6 +2,7 @@ import 'package:Shopby/src/database_handler/database_handler_service.dart';
 import 'package:Shopby/src/database_handler/history.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:intl/intl.dart';
 
 @Component(
   selector: 'user-history',
@@ -31,5 +32,11 @@ class UserHistory implements  OnInit {
     if (resp != null) {
       historyItems.addAll(resp);
     }
+  }
+
+  String formatDate(num stamp) {
+    var formatter = DateFormat('yyyy-MM-dd');
+    var formatted = formatter.format(DateTime.fromMillisecondsSinceEpoch(stamp));
+    return formatted;
   }
 }

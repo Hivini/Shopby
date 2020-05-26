@@ -7,7 +7,9 @@ import 'package:Shopby/src/database_handler/database_handler_service.dart';
 @Component(
   selector: 'statistics-page',
   templateUrl: 'statistics_page.html',
-  directives: [
+  styleUrls: [
+    '../../app_component.css',
+    'package:angular_components/app_layout/layout.scss.css',
   ],
 )
 class StatisticsPage implements AfterViewInit {

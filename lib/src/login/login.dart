@@ -16,6 +16,10 @@ import 'package:pq_toast/pq_toast.dart';
     MaterialButtonComponent,
     MaterialInputComponent,
   ],
+  styleUrls: [
+    '../../app_component.css',
+    'package:angular_components/css/mdc_web/card/mdc-card.scss.css',
+  ],
 )
 class Login {
   final DatabaseHandlerService _dbService;

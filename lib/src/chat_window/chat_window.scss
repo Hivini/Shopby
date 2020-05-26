@@ -7,8 +7,8 @@
 }
 
 .custom-width {
-  @include mat-drawer-width(10%);
-  @include mat-temporary-drawer-width(10%);
+  @include mat-drawer-width(20%);
+  @include mat-temporary-drawer-width(20%);
 }
 
 #receiverMessage {
@@ -17,4 +17,8 @@
 
 #newMessage {
   width: 500px;
+}
+
+.newMessageForm {
+  margin-top: 20px;
 }

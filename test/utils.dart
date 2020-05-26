@@ -1,4 +1,5 @@
 import 'package:Shopby/src/database_handler/database_handler_service.dart';
+import 'package:Shopby/src/database_handler/product.dart';
 import 'package:Shopby/src/database_handler/user.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
@@ -21,11 +22,23 @@ class MockRouter extends Mock implements Router {}
 
 class MockDatabase extends Mock implements DatabaseHandlerService {
   @override
-  User currentUser;
+  User currentUser = User('test', 'te', 0, 'a', 'a');
 
   @override
   Future<bool> login(String email, String password) {
-    currentUser = User('test', 'te', 0, 'a', 'a');
-    return Future(() => true);
+    if (password == 'a') {
+      currentUser = User('test', 'te', 0, 'a', 'a');
+      return Future(() => true);
+    }
+    return Future(() => false);
+  }
+
+  void removeUser() {
+    currentUser = null;
+  }
+
+  @override
+  Future<List<Product>> getProductsByUser(String email) {
+    return Future(() => [Product('1', 'Product', 'Desc', 2, 'url', User('test', 'te', 0, 'a', 'a'), 2, 1)]);
   }
 }

@@ -1,8 +1,6 @@
 @TestOn('browser')
 
 import 'package:Shopby/src/database_handler/database_handler_service.dart';
-import 'package:Shopby/src/database_handler/user.dart';
-import 'package:Shopby/src/route_paths.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:http/http.dart';
@@ -42,15 +40,25 @@ void main() {
   tearDown(disposeAnyRunningTest);
 
   group('grant access', () {
+    setUp(() async {
+      final db = injector.get<MockDatabase>(DatabaseHandlerService);
+      await db.removeUser();
+      await fixture.update();
+      final context =
+      HtmlPageLoaderElement.createFromElement(fixture.rootElement);
+      appComponentPO = AppComponentPO.create(context);
+    });
+
     test('Login appears', () {
       expect(appComponentPO.loginButtonText, 'Login');
       expect(appComponentPO.registerButtonText, 'Register');
     });
   });
 
-  group('logged user', () {
+  group('correct login credentials', () {
     setUp(() async {
       final db = injector.get<MockDatabase>(DatabaseHandlerService);
+      await db.removeUser();
       await db.login('a', 'a');
       await fixture.update();
       final context =
@@ -60,6 +68,22 @@ void main() {
 
     test('Logged user', () {
       expect(appComponentPO.productsButtonText, isNotNull);
+    });
+  });
+
+  group('incorrect login credentials', () {
+    setUp(() async {
+      final db = injector.get<MockDatabase>(DatabaseHandlerService);
+      await db.removeUser();
+      await db.login('a', 'b');
+      await fixture.update();
+      final context =
+      HtmlPageLoaderElement.createFromElement(fixture.rootElement);
+      appComponentPO = AppComponentPO.create(context);
+    });
+
+    test('Logged user', () {
+      expect(appComponentPO.registerButtonText, isNotNull);
     });
   });
 }

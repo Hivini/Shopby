@@ -1,5 +1,5 @@
 <div *ngIf="product != null">
-  <material-button (trigger)="showProductDialog = true"><h1>{{product.getTitle()}}</h1></material-button>
+  <material-button (trigger)="showProductDialog = true"><h1 class="productInfoTitle">{{product.getTitle()}}</h1></material-button>
   <img [src]="product.getImageUrl()" class="productSmallImage">
   <p>Vendor: {{product.getUser().getName()}}</p>
   <div *ngIf="showRemoveButton">

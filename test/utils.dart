@@ -18,7 +18,19 @@ class InjectorProbe {
   T get<T>(dynamic token) => injector?.get(token);
 }
 
-class MockRouter extends Mock implements Router {}
+class MockRouter extends Mock implements Router {
+  String url = '';
+
+  @override
+  Future<NavigationResult> navigate(String path, [NavigationParams navigationParams]) {
+    url = path;
+    return null;
+  }
+
+  String toUrl() {
+    return url;
+  }
+}
 
 class MockDatabase extends Mock implements DatabaseHandlerService {
   @override
@@ -40,5 +52,10 @@ class MockDatabase extends Mock implements DatabaseHandlerService {
   @override
   Future<List<Product>> getProductsByUser(String email) {
     return Future(() => [Product('1', 'Product', 'Desc', 2, 'url', User('test', 'te', 0, 'a', 'a'), 2, 1)]);
+  }
+
+  @override
+  Future<List<Product>> searchProducts(String query) async {
+    return Future(() => [Product('1', 'Product', 'Cheap', 2, 'url', User('test', 'te', 0, 'a', 'a'), 2, 1)]);
   }
 }

@@ -30,6 +30,28 @@ class $UserProductPO extends UserProductPO with $$UserProductPO {
     return returnMe;
   }
 
+  String get titleInput {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('UserProductPO', 'titleInput');
+    }
+    final returnMe = super.titleInput;
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('UserProductPO', 'titleInput');
+    }
+    return returnMe;
+  }
+
+  Future<void> clickAddButton() {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('UserProductPO', 'clickAddButton');
+    }
+    final returnMe = super.clickAddButton();
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('UserProductPO', 'clickAddButton');
+    }
+    return returnMe;
+  }
+
   String toStringDeep() => 'UserProductPO\n\n${$__root__.toStringDeep()}';
 }
 
@@ -46,6 +68,30 @@ class $$UserProductPO {
     final returnMe = element;
     for (final __listener in $__root__.listeners) {
       __listener.endPageObjectMethod('UserProductPO', '_productInfoTitle');
+    }
+    return returnMe;
+  }
+
+  PageLoaderElement get _addProductButton {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('UserProductPO', '_addProductButton');
+    }
+    final element = $__root__.createElement(First(ByCss('.blue')), [], []);
+    final returnMe = element;
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('UserProductPO', '_addProductButton');
+    }
+    return returnMe;
+  }
+
+  PageLoaderElement get _titleProductInput {
+    for (final __listener in $__root__.listeners) {
+      __listener.startPageObjectMethod('UserProductPO', '_titleProductInput');
+    }
+    final element = $__root__.createElement(ById('title'), [], []);
+    final returnMe = element;
+    for (final __listener in $__root__.listeners) {
+      __listener.endPageObjectMethod('UserProductPO', '_titleProductInput');
     }
     return returnMe;
   }

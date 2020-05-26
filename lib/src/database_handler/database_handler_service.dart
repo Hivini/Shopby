@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:Shopby/src/database_handler/message.dart';
-import 'package:Shopby/src/database_handler/privileged_user.dart';
 import 'package:Shopby/src/database_handler/product.dart';
 import 'package:Shopby/src/database_handler/user.dart';
 import 'package:Shopby/config/credentials.dart' as credentials;
@@ -10,7 +9,6 @@ import 'package:http/http.dart';
 import 'history.dart';
 
 class DatabaseHandlerService {
-  static final _headers = {'Content-Type': 'application/json'};
   static const _dbUrl = credentials.dbUrl; // URL to web API
   final Client _http;
   User currentUser;
@@ -152,6 +150,19 @@ class DatabaseHandlerService {
   Future<bool> sendNewMessage(String to, String from, String message) async {
     try {
       var response = await _http.post('${_dbUrl}/chat/saveMessage', headers: {'to': to, 'from': from, 'message': message});
+      var data = _extractData(response);
+      if (data['successful'] == 1) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw Future.error(e);
+    }
+  }
+
+  Future<bool> addToRatings(String id, String rating) async {
+    try {
+      var response = await _http.post('${_dbUrl}/products/addToRatings', headers: {'id': id, 'rating': rating});
       var data = _extractData(response);
       if (data['successful'] == 1) {
         return true;

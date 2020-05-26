@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:Shopby/src/database_handler/database_handler_service.dart';
 import 'package:angular/angular.dart';
+import 'package:pq_toast/pq_toast.dart';
 
 @Component(
     selector: 'rating-handler',
@@ -19,6 +21,7 @@ class RatingHandler implements OnInit {
   static const String _STAR_OFF_CLASS = 'star-off';
 
   static final int DEFAULT_MAX = 5;
+  final DatabaseHandlerService _dbService;
   final _finished = StreamController<int>();
 
   @Input()
@@ -28,6 +31,8 @@ class RatingHandler implements OnInit {
   Stream<int> get finished => _finished.stream;
 
   List<int> stars = [];
+
+  RatingHandler(this._dbService);
 
   @override
   void ngOnInit() {
@@ -45,9 +50,15 @@ class RatingHandler implements OnInit {
     rating = (star == 1 && rating == 1) ? 0 : star;
   }
 
-  void addToRatings() {
+  void addToRatings() async {
     print(productId);
     print(rating);
+    var resp = await _dbService.addToRatings(productId, rating.toString());
+    if (resp) {
+      Toast.showSuccessToast('The product has been rated');
+    } else {
+      Toast.showWarningToast('There was a problem in the rating');
+    }
     _finished.add(rating);
   }
 }

@@ -8,12 +8,12 @@
           <material-button [routerLink]="RoutePaths.home.toUrl()">
             Home
           </material-button>
-          <material-button [routerLink]="RoutePaths.login.toUrl()">
+          <material-button id="loginButton" [routerLink]="RoutePaths.login.toUrl()">
             Login
           </material-button>
         </nav>
         <nav class="material-navigation">
-          <material-button [routerLink]="RoutePaths.register.toUrl()">
+          <material-button id="registerButton" [routerLink]="RoutePaths.register.toUrl()">
             Register
           </material-button>
         </nav>
@@ -39,7 +39,7 @@
             Add Moderator
           </material-button>
         </nav>
-        <nav class="material-navigation" *ngIf="dbService.currentUser.role == 0">
+        <nav id="productsButton" class="material-navigation" *ngIf="dbService.currentUser.role == 0">
           <material-button [routerLink]="RoutePaths.userProducts.toUrl()">Products</material-button>
         </nav>
         <nav class="material-navigation" *ngIf="dbService.currentUser.role == 0">
